@@ -2,7 +2,7 @@
 
 // Get (MySQL / Cockroach DB / Redis / Kafka) Connection
 const config = require('../config');
-const KafkaProducer = require('../utilities').KafkaProducer;
+const KafkaProducer = require('scan_eat_utils').KafkaProducer;
 
 const kafkaProducer = new KafkaProducer({ kafkaConfig: config.kafka });
 (async function () {
