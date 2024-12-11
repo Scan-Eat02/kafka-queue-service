@@ -6,12 +6,11 @@ const makeEnqueueJob = ({
     return async function enqueueJob(req, res) {
         try {
             const { topic, key, partition, message, delay, jobId, reEnqueue } = req.body;
-            const linkname = message.linkname || message.hostname || message.host || req.body.linkname || null;
 
-            console.info(`Got new message to publish for link: ${linkname} topic -> ${topic}
+            console.info(`Got new message to publish for topic -> ${topic}
             delay -> ${delay} jobId -> ${jobId} key -> ${key} partition -> ${partition}`);
 
-            console.info(`Calling publishMessage for ${linkname}-${topic}`);
+            console.info(`Calling publishMessage for ${topic}`);
             await publishMessage({ key, topic, partition, message });
 
             const successResponse = formatResponse({

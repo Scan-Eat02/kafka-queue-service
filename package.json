@@ -17,6 +17,6 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.21.1",
-    "scan_eat_utils": "1.1.1"
+    "scan_eat_utils": "1.1.2"
   }
 }

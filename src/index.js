@@ -6,6 +6,7 @@ const port = 8084;
 // Import the routes from the router directory
 const router = require('./routes');
 
+app.use(express.json());
 app.use(cors());
 
 // Use the routes for all paths
