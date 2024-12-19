@@ -1,8 +1,8 @@
 const config = {
     kafka: {
-        host: '127.0.0.1',
+        host: '172.19.1.24',
         port: 9092,
-        brokerList: 'localhost:9093',
+        brokerList: '172.19.1.24:9093',
     }
 }
 
