@@ -12,7 +12,6 @@ RUN /bin/bash -c "source ~/.nvm/nvm.sh && nvm install 16"
 
 # Copy package.json and package-lock.json (if available) for dependency installation
 COPY package.json ./
-COPY package-lock.json ./
 
 # Install dependencies
 RUN npm install
