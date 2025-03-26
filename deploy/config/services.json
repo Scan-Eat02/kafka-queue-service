@@ -1,0 +1,12 @@
+{
+    "kafka-queue-service": {
+      "replicas": 1,
+      "port": 3004,
+      "targetPort": 3000,
+      "image": "yashd26/scan_eat:kafka-queue-service",
+      "env": {
+        "NODE_ENV": "prod"
+      }
+    }
+  }
+  

@@ -1,0 +1,105 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  namespace: default
+data:
+  nginx.conf: |
+    events { }
+
+    http {
+        upstream auth_service {
+            server auth-service.default.svc.cluster.local:3000;
+        }
+        upstream cart_service {
+            server cart-service.default.svc.cluster.local:3000;
+        }
+        upstream event_service {
+            server event-service.default.svc.cluster.local:3000;
+        }
+        upstream kafka_queue_service {
+            server kafka-queue-service.default.svc.cluster.local:3000;
+        }
+        upstream user_service {
+            server user-service.default.svc.cluster.local:3000;
+        }
+        upstream store_service {
+            server store-service.default.svc.cluster.local:3000;
+        }
+        upstream product_service {
+            server product-service.default.svc.cluster.local:3000;
+        }
+        upstream payment_service {
+            server payment-service.default.svc.cluster.local:3000;
+        }
+        upstream order_service {
+            server order-service.default.svc.cluster.local:3000;
+        }
+
+        server {
+            listen 80;
+
+            location /auth/ {
+                proxy_pass http://auth_service/;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            }
+
+            location /cart/ {
+                proxy_pass http://cart_service/;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            }
+
+            location /event/ {
+                proxy_pass http://event_service/;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            }
+
+            location /kafka/ {
+                proxy_pass http://kafka_queue_service/;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            }
+
+            location /user/ {
+                proxy_pass http://user_service/;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            }
+
+            location /store/ {
+                proxy_pass http://store_service/;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            }
+
+            location /product/ {
+                proxy_pass http://product_service/;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            }
+
+            location /payment/ {
+                proxy_pass http://payment_service/;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            }
+
+            location /order/ {
+                proxy_pass http://order_service/;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            }
+        }
+    }

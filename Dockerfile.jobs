@@ -1,0 +1,21 @@
+# Use an official Node.js image as the base
+FROM node:20
+
+# Set the working directory inside the container
+WORKDIR /job-runner
+
+# Copy package.json to install dependencies
+COPY package.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy only the relevant job script to avoid unnecessary files
+ARG JOB_FILE
+COPY $JOB_FILE /job-runner/job.js
+
+# Expose a port (if needed)
+EXPOSE 3000
+
+# Run the job script
+CMD ["node", "/job-runner/job.js"]

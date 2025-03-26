@@ -1,12 +1,11 @@
-// index.js
-const backendConfig = require('./backend-config');
-const serviceConfig = require('./service-config');
+const env = process.env.NODE_ENV || "dev";
 
-// Combine the configurations into a single object
+const backendConfig = require(`./${env === "dev" ? "backend-config" : "prod-backend-config"}`);
+const serviceConfig = require(`./${env === "dev" ? "service-config" : "prod-service-config"}`);
+
 const config = {
-    ...backendConfig,      // Spread the backend config
-    ...serviceConfig       // Spread the service config
+  ...backendConfig,
+  ...serviceConfig,
 };
 
-// Export the combined config
 module.exports = config;

@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{JOB_NAME}}
+spec:
+  replicas: {{REPLICAS}}
+  selector:
+    matchLabels:
+      app: {{JOB_NAME}}
+  template:
+    metadata:
+      labels:
+        app: {{JOB_NAME}}
+    spec:
+      containers:
+      - name: {{JOB_NAME}}
+        image: {{IMAGE}}
+        command: ["node", "{{FILE_TO_RUN}}"]
+        env:
+{{ENV_VARS}}

@@ -26,6 +26,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .  # Set the context to the root of the repository
+          file: Dockerfile
           push: true  # Push the image to Docker Hub
           tags: ${{ secrets.DOCKER_USERNAME }}/scan_eat:kafka-queue-service  # Replace with your Docker Hub username and desired image name
 

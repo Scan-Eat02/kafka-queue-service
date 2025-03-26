@@ -1,0 +1,30 @@
+name: Deploy Services
+
+on:
+  workflow_run:
+    workflows: ["Build and Publish Docker Image"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}  # Ensure it runs only if the previous workflow succeeded
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Generate YAML Files
+        run: node src/deploy/script/generate-yaml.js
+
+      - name: Deploy Services
+        run: node src/deploy/script/deploy.js
